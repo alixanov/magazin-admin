@@ -8,6 +8,7 @@ import AddProductForm from '../../page/admin-panel/AddProductForm';
 
 const Main = () => {
   const [products, setProducts] = useState([]);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
     axios.get('https://669a7ba49ba098ed61ffcfbc.mockapi.io/magazin')
@@ -20,12 +21,27 @@ const Main = () => {
   }, []);
 
   const addProduct = (product) => {
-    // This function adds a new product to the state
-    setProducts([...products, product]);
+    if (editingProduct) {
+      axios.put(`https://669a7ba49ba098ed61ffcfbc.mockapi.io/magazin/${product.id}`, product)
+        .then(response => {
+          setProducts(products.map(p => p.id === product.id ? response.data : p));
+          setEditingProduct(null);
+        })
+        .catch(error => {
+          console.error('Error updating product:', error);
+        });
+    } else {
+      axios.post('https://669a7ba49ba098ed61ffcfbc.mockapi.io/magazin', product)
+        .then(response => {
+          setProducts([...products, response.data]);
+        })
+        .catch(error => {
+          console.error('Error adding product:', error);
+        });
+    }
   };
 
   const deleteProduct = (id) => {
-    // This function deletes a product from the API and updates the state
     axios.delete(`https://669a7ba49ba098ed61ffcfbc.mockapi.io/magazin/${id}`)
       .then(() => {
         setProducts(products.filter(product => product.id !== id));
@@ -35,13 +51,17 @@ const Main = () => {
       });
   };
 
+  const editProduct = (product) => {
+    setEditingProduct(product);
+  };
+
   return (
     <div className='main'>
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/card' element={<Card />} />
-        <Route path='/addformproduct' element={<AddProductForm addProduct={addProduct} />} />
-        <Route path='/report' element={<Report products={products} deleteProduct={deleteProduct} />} />
+        <Route path='/addformproduct' element={<AddProductForm addProduct={addProduct} editingProduct={editingProduct} />} />
+        <Route path='/report' element={<Report products={products} deleteProduct={deleteProduct} editProduct={editProduct} />} />
       </Routes>
     </div>
   );

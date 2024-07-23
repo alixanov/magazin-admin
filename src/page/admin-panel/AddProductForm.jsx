@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 import {
   TextField,
   Button,
@@ -8,6 +10,8 @@ import {
   IconButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProductForm = ({ addProduct }) => {
   const [formData, setFormData] = useState({
@@ -56,6 +60,7 @@ const AddProductForm = ({ addProduct }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addProduct(formData);
+    toast.success('Продукт успешно добавлен!');
     setFormData({
       id: '',
       titleProduct: '',
@@ -189,6 +194,7 @@ const AddProductForm = ({ addProduct }) => {
           </Grid>
         </Grid>
       </form>
+      <ToastContainer />
     </Container>
   );
 };

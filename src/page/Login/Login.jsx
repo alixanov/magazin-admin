@@ -7,11 +7,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  console.log('Stored Login:', process.env.REACT_APP_LOGIN);
-  console.log('Stored Password:', process.env.REACT_APP_PASSWORD);
+
 
   const handleLogin = () => {
-    if (login === process.env.REACT_APP_LOGIN && password === process.env.REACT_APP_PASSWORD) {
+    if (login === "login"&& password === "parol") {
       navigate('/card');
     } else {
       alert('Неправильный логин или пароль');
