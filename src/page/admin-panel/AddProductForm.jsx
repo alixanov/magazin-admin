@@ -93,7 +93,7 @@ const AddProductForm = ({ addProduct }) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Название продукта"
+              label="Общий название продукта"
               name="titleProduct"
               value={formData.titleProduct}
               onChange={handleChange}
@@ -101,19 +101,10 @@ const AddProductForm = ({ addProduct }) => {
               required
             />
           </Grid>
+     
           <Grid item xs={12}>
             <TextField
-              label="Имя продукта"
-              name="mahsulotnomi"
-              value={formData.mahsulotnomi}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Икон для слайдера"
+              label="Икон для слайдера URL"
               name="swiperuchun"
               value={formData.swiperuchun}
               onChange={handleChange}
@@ -149,7 +140,7 @@ const AddProductForm = ({ addProduct }) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Название продукта"
+              label="Главная название продукта"
               name="nameproduct"
               value={formData.nameproduct}
               onChange={handleChange}

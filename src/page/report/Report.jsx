@@ -16,7 +16,6 @@ const Report = ({ products, deleteProduct }) => {
               <img className="product-avatar" src={product.swiperuchun} alt={product.titleProduct} />
               <h5 className="product-title">{product.titleProduct}</h5>
             </div>
-            <p className="product-description">{product.mahsulotnomi}</p>
             <p className="product-description">{product.nameproduct}</p>
             <p className="product-price">Цена: ${product.price}</p>
             <p className="product-info">{product.productinfo}</p>
